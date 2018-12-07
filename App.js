@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TextInput, Button } from 'react-native';
+import ListItem from './src/components/ListItem/ListItem.js';
+import InputField from './src/components/InputField/InputField.js';
 
 export default class App extends Component {
   state = {
@@ -21,24 +23,12 @@ export default class App extends Component {
   };
   render() {
     const placeOutput = this.state.places.map((place, i) => (
-      <Text key={i}>{place}</Text>
+      <ListItem key={i} placeName={place} />
     ));
     return (
       <View style={styles.container}>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.placeInput}
-            placeholder="Search for a number"
-            value={this.state.placeName}
-            onChangeText={this.placeNameChangeHandler}
-          />
-          <Button
-            style={styles.placeButton}
-            title="Search"
-            onPress={this.placeSubmitHandler}
-          />
-        </View>
-        <View>{placeOutput}</View>
+        <InputField />
+        <View style={styles.listContainer}>{placeOutput}</View>
       </View>
     );
   }
@@ -52,18 +42,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
     paddingTop: 26
   },
-  inputContainer: {
+
+  listContainer: {
     width: '80%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center'
-  },
-  placeInput: {
-    width: '70%',
-    borderColor: 'black',
-    borderBottomWidth: 2
-  },
-  placeButton: {
-    width: '30%'
+    paddingTop: 10
   }
 });
